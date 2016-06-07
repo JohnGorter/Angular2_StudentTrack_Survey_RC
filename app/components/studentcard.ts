@@ -6,23 +6,26 @@ import { StudentFormatter } from '../pipes/studentFormatter';
 import { StudentService } from '../services/studentservice';
 
 @Component({
-	selector:'student-card',
-	inputs:['student'],
-	pipes:[StudentFormatter],
-	template:`
-	<div class="dialog light-primary-color text-primary-color"><div [ngClass]="{defaultPrimaryColor:true}"> 
+	selector: 'student-card',
+	inputs: ['student'],
+	pipes: [StudentFormatter],
+	template: `
+	<div class="dialog light-primary-color text-primary-color" *ngIf="student"><div [ngClass]="{defaultPrimaryColor:true}"> 
 	{{ student.firstname }} {{ student.lastname }}</div>
 	<p> Address: {{ student.address }} <br/> Phone: {{ student.phone }} </p></div>
 	`,
-	styles:[`
+	styles: [`
 	.dialog { border:1px solid black;};
 	.header { margin-top:0px;}
 	`]
 })
-export class StudentCard
-{
-	student:Student;
-	constructor(studentservice:StudentService/* ??code ?? */){
-		/* ?? code ?? */
+export class StudentCard {
+	student: Student;
+	constructor(studentservice: StudentService, routeParams: RouteParams) {
+		studentservice.getStudentById(parseInt(routeParams.params['id']))
+			.subscribe(student => {
+				this.student = student;
+				console.log(`selected student ${this.student}`);
+			});
 	}
-}	
+}
