@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { Student, StudentTrack } from './models/student';
-import { StudentDetails } from './components/studentdetails';
+import {Student, StudentTrack} from './models/student';
+import {StudentDetails} from './components/studentdetails';
 
 // create a class with annotations..
 @Component({	
 	selector: 'student-track-survey',
- 	template: `
+	template: `
 	<div class="studenttrack light-primary-color text-primary-color">
-	   <h1 class="dark-primary-color text-primary-color">Studenttrack {{studentTrack.name}} (<span [innerText]="getCount()"></span> attendees)</h1>
+	   <h1 class="dark-primary-color text-primary-color">Student track {{studentTrack.name}} (<span [innerText]="getCount()"></span> attendees)</h1>
 	    <student-details 
 			[student]="student" 
-			[isSelected]="currentstudent === student"
+			[isSelected]="currentStudent === student"
 			*ngFor="let student of studentTrack.getStudents()" 
 			(selected)="setSelected(student)"> 
 		</student-details>
@@ -21,7 +21,8 @@ import { StudentDetails } from './components/studentdetails';
 	 .student { padding:15px; }
 	 .studentTrack { border:1px solid black;margin:5px;padding:0px; }
 	 .studentTrack h1 { margin:0px;padding:15px;}
-	`]
+	`],
+    directives: [StudentDetails]
 })
 export class SurveyApplication {	
 	// ADD FIELD FOR THE STUDENTTRACK
@@ -45,7 +46,7 @@ export class SurveyApplication {
 	}
     
 	setSelected(student:Student){
-		console.log("student selected" + student.firstname);
+		console.log(`student selected ${student.firstname}`);
 		this.currentStudent = student;
 	}
     
@@ -65,4 +66,4 @@ export class SurveyApplication {
 }
 
 // bootstrap our application..
-bootstrap(SurveyApplication); 
+bootstrap(SurveyApplication);
