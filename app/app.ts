@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { Student, StudentTrack} from './models/student';
+import { Student, StudentTrack } from './models/student';
+import { StudentDetails } from './components/studentdetails';
 
 // create a class with annotations..
-@Component({	selector: 'student-track-survey',
-
-	template: `
-	<div class="studentTrack">
-	   <h1 class="default-primary-color text-primary-color">Student track {{studentTrack.name}} (<span inner-text="getCount()"></span> attendees)</h1>
-	   <div class="student" *ngFor="#student of studentTrack.getStudents()">
-	     {{ student.firstname }} {{ student.lastname }} {{ student.school }}
-	   </div>
+@Component({	
+	selector: 'student-track-survey',
+ 	template: `
+	<div class="studenttrack light-primary-color text-primary-color">
+	   <h1 class="dark-primary-color text-primary-color">Studenttrack {{studentTrack.name}} (<span [innerText]="getCount()"></span> attendees)</h1>
+	    <student-details 
+			[student]="student" 
+			[isSelected]="currentstudent === student"
+			*ngFor="let student of studentTrack.getStudents()" 
+			(selected)="setSelected(student)"> 
+		</student-details>
 	 </div>
 	`,
 	styles:[`
@@ -22,6 +26,7 @@ import { Student, StudentTrack} from './models/student';
 export class SurveyApplication {	
 	// ADD FIELD FOR THE STUDENTTRACK
 	public studentTrack: StudentTrack; 	
+	public currentStudent: Student;
 	
 	constructor (){
 		// ADD CODE HERE TO INSTANTIATE A NEW STUDENTTRACK
@@ -37,6 +42,11 @@ export class SurveyApplication {
 	
 	getCount(){
 		return this.studentTrack.getStudents().length
+	}
+    
+	setSelected(student:Student){
+		console.log("student selected" + student.firstname);
+		this.currentStudent = student;
 	}
     
     private randomFirstname(){
