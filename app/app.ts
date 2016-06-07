@@ -14,7 +14,7 @@ import 'rxjs/Rx';
     template: `
 	<student-track-form></student-track-form>
 	<div *ngFor="let studentTrack of studentTracks" class="studenttrack light-primary-color text-primary-color">
-	   <h1 class="dark-primary-color text-primary-color">Student track {{studentTrack.name}} (<span [textContent]="studentTrack.getStudents().length"></span> attendees)</h1>
+	   <h1 class="dark-primary-color text-primary-color">Student track {{studentTrack.name}} (<span [innerText]="studentTrack.getStudents().length"></span> attendees)</h1>
 	    <student-details 
 			[student]="student" 
 			[isSelected]="currentStudent === student"
