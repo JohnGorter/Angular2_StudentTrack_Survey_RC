@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { HTTP_PROVIDERS } from '@angular/http';
-import { Student, StudentTrack } from './models/student';
-import { StudentDetails } from './components/studentdetails';
-import { StudentTrackService } from './services/studenttrackservice';
-import { StudentService } from './services/studentservice';
-import {DemoFormSku} from './form';
+import {HTTP_PROVIDERS} from '@angular/http';
+import {Student, StudentTrack} from './models/student';
+import {StudentDetails} from './components/studentdetails';
+import {StudentTrackService} from './services/studenttrackservice';
+import {StudentService} from './services/studentservice';
+import {StudentTrackForm} from './form';
 import 'rxjs/Rx';
 
 // create a class with annotations..
 @Component({
     selector: 'student-track-survey',
     template: `
-	<demo-form-sku></demo-form-sku>
+	<student-track-form></student-track-form>
 	<div *ngFor="let studentTrack of studentTracks" class="studenttrack light-primary-color text-primary-color">
-	   <h1 class="dark-primary-color text-primary-color">Student track {{studentTrack.name}} (<span [innerText]="studentTrack.getStudents().length"></span> attendees)</h1>
+	   <h1 class="dark-primary-color text-primary-color">Student track {{studentTrack.name}} (<span [textContent]="studentTrack.getStudents().length"></span> attendees)</h1>
 	    <student-details 
 			[student]="student" 
 			[isSelected]="currentStudent === student"
@@ -29,7 +29,7 @@ import 'rxjs/Rx';
 	 .studentTrack { border:1px solid black;margin:5px;padding:0px; }
 	 .studentTrack h1 { margin:0px;padding:15px;}
 	`],
-    directives: [StudentDetails/*, DemoFormSku*/]
+    directives: [StudentDetails, StudentTrackForm]
 })
 export class SurveyApplication {
     public studentTracks: StudentTrack[];
@@ -37,7 +37,7 @@ export class SurveyApplication {
 
     constructor(studentTrackService: StudentTrackService) {
         this.studentTracks = [];
-        studentTrackService.getStudentTracks().subscribe(studentTracks => this.studentTracks = studentTracks);
+        studentTrackService.studentTracksRetrieved.subscribe(studentTracks => this.studentTracks = studentTracks);
     }
 
     setSelected(student: Student) {

@@ -33,6 +33,8 @@ export class StudentTrack {
     }
 
     public getStudents() {
-        return this.students;
+        let students: Student[] = [];
+        this.students.forEach(student => students.push(student));
+        return students;
     }
 }
