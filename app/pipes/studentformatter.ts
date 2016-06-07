@@ -1,10 +1,11 @@
 import { Pipe, PipeTransform  } from '@angular/core';
-// ?code? //
+import { Student } from '../models/student';
 
 @Pipe({
-	// ?code? //
-    name:''
+    name: 'studentFormatter'
 })
-export class StudentFormatter implements PipeTransform{
-	 // ?code? //
+export class StudentFormatter implements PipeTransform {
+    transform(value: Student, args: string[]): any {
+        return "<strong>Naam: " + value.firstname + " " + value.lastname + "</strong><br/>School: " + value.school;
+    }
 }

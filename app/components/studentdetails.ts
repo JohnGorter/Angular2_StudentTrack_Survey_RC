@@ -1,7 +1,7 @@
 // YOUR IMPORTS HERE...
 import {Component, EventEmitter} from '@angular/core';
 import {Student} from '../models/student';
-// ?code? //
+import { StudentFormatter } from '../pipes/studentFormatter';
 
 
 // YOUR COMPONENT ANNOTATION AND CLASS HERE...
@@ -9,9 +9,9 @@ import {Student} from '../models/student';
 	selector:'student-details',
 	inputs:['student','isSelected'],
 	outputs:['selected'],
-	// ?code? //
+	pipes:[StudentFormatter],
 	template:`
-	<div (click)="setSelected()" [class.defaultPrimaryColor]="isSelected" class="student" ?code? ></div>
+	<div (click)="setSelected()" [class.defaultPrimaryColor]="isSelected" class="student" [innerHtml]="student | studentFormatter"></div>
 	`
 })
 export class StudentDetails {
