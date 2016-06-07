@@ -24,6 +24,12 @@ export class StudentService {
             .map(studentsJson => studentsJson.map(studentJson => new Student(studentJson)))
             .catch(this.handleError);
     }
+    
+    public getStudentById(id: number): Observable<Student> {
+        return this.getStudents()
+            .map(students => students.find(student => student.id === id))
+            .first();
+    }
 
     private handleError(error: Response) {
         // in a real world app, we may send the error to some remote logging infrastructure

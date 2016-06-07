@@ -3,24 +3,36 @@
         "id": 1,
         "firstname": "John",
         "lastname": "Gorter",
-        "school": "HAN"
+        "school": "HAN",
+        "address": "street 34 5555 AA Amsterdam",
+        "phone": "0612345678",
+        "age": 40
     },
     {
         "id": 2,
         "firstname": "Nico",
         "lastname": "Jansen",
-        "school": "Hogeschool Breda"
+        "school": "Hogeschool Breda",
+        "address": "123 Fakestreet, 1234 AB Springfield",
+        "phone": "06547981356",
+        "age": 30
     },
     {
         "id": 3,
         "firstname": "Harry",
         "lastname": "De Smedt",
-        "school": "Universiteit Amsterdam"
+        "school": "Universiteit Amsterdam",
+        "address": "lane 4 3444 SX Den Haag",
+        "phone": "0674727283",
+        "age": 35
     },
     {
         "id": 4,
         "firstname": "Klaas",
         "lastname": "Beritsen",
-        "school": "Hogeschool Den Bosch"
+        "school": "Hogeschool Den Bosch",
+        "address": "road 2 1235 RE Leeuwarden",
+        "phone": "06594831564",
+        "age": 25
     }
 ]

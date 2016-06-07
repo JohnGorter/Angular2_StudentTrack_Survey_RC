@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, provide } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
+import { RouteConfig,  RouterLink, RouterOutlet, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated'; 
+import { LocationStrategy, HashLocationStrategy } from '@angular/common'; 
 import {HTTP_PROVIDERS} from '@angular/http';
 import {Student, StudentTrack} from './models/student';
 import {StudentDetails} from './components/studentdetails';
 import {StudentTrackService} from './services/studenttrackservice';
 import {StudentService} from './services/studentservice';
+import { StudentCard } from './components/studentcard';
 import {StudentTrackForm} from './form';
 import 'rxjs/Rx';
 
@@ -29,8 +32,11 @@ import 'rxjs/Rx';
 	 .studentTrack { border:1px solid black;margin:5px;padding:0px; }
 	 .studentTrack h1 { margin:0px;padding:15px;}
 	`],
-    directives: [StudentDetails, StudentTrackForm]
+    directives: [StudentDetails, StudentTrackForm, /* ?? code ?? */]
 })
+@RouteConfig([
+	// ?? code ??
+])
 export class SurveyApplication {
     public studentTracks: StudentTrack[];
     public currentStudent: Student;
@@ -51,4 +57,5 @@ export class SurveyApplication {
 }
 
 // bootstrap our application..
-bootstrap(SurveyApplication, [StudentTrackService, StudentService, HTTP_PROVIDERS]); 
+bootstrap(SurveyApplication, [StudentTrackService, StudentService, HTTP_PROVIDERS,
+ROUTER_PROVIDERS, provide(LocationStrategy, {useClass: HashLocationStrategy})]); 

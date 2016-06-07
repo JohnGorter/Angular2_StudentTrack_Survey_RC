@@ -1,10 +1,8 @@
-// YOUR IMPORTS HERE...
 import {Component, EventEmitter} from '@angular/core';
 import {Student} from '../models/student';
 import { StudentFormatter } from '../pipes/studentFormatter';
 
 
-// YOUR COMPONENT ANNOTATION AND CLASS HERE...
 @Component({
     selector: 'student-details',
     inputs: ['student', 'isSelected'],
