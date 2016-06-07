@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import {Student, StudentTrack} from './models/student';
+import { Student, StudentTrack} from './models/student';
 
 // create a class with annotations..
-@Component({	
-	selector: 'student-track-survey',
+@Component({	selector: 'student-track-survey',
+
 	template: `
 	<div class="studentTrack">
 	   <h1 class="default-primary-color text-primary-color">Student track {{studentTrack.name}} (<span inner-text="getCount()"></span> attendees)</h1>
@@ -21,27 +21,37 @@ import {Student, StudentTrack} from './models/student';
 })
 export class SurveyApplication {	
 	// ADD FIELD FOR THE STUDENTTRACK
-	// your code here...
-	
+	public studentTrack: StudentTrack; 	
 	
 	constructor (){
 		// ADD CODE HERE TO INSTANTIATE A NEW STUDENTTRACK
 		// AND ADD SOME STUDENTS TO THE STUDENTTRACK
-		// your code here...
-	   
+		this.studentTrack = new StudentTrack('Angular 2');
+       
 	   // REPLACE THIS ANONYMOUS FUNCTION WITH A PHAT ARROW ONE
-	   window.setInterval(function() {
+	   window.setInterval(() => {
 		   // RANDOMLY ADD NEW ATTENDEES TO THE STUDENTTRACK
-		   // your code here...
-		 	
+           this.studentTrack.addStudentToTrack(new Student(this.randomFirstname(), this.randomLastname(), this.randomSchool()));
 	   }, 2000);
 	}
 	
 	getCount(){
-		// ADD CODE THAT RETURNS THE NUMBER OF STUDENTS FROM THE STUDENTTRACK
-		// your code here...
-
+		return this.studentTrack.getStudents().length
 	}
+    
+    private randomFirstname(){
+        return this.pullRandom(['Nico', 'John', 'Harry', 'Klaas', 'Henk-Jan']);
+    }
+    private randomLastname(){
+        return this.pullRandom(['Beritsen', 'De Smedt', 'Jansen', 'Gorter', 'Brabander']);
+    }
+    private randomSchool(){
+        return this.pullRandom(['Hogeschool Breda', 'Hogeschool Den Bosch', 'Universiteit Amsterdam', 'Hogschool Utrecht']);
+    }
+    
+    private pullRandom(source: string[]){
+      return source[Math.floor(Math.random()*100)%source.length];
+    }
 }
 
 // bootstrap our application..
