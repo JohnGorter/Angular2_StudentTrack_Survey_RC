@@ -1,9 +1,10 @@
 import { Student } from '../models/Student';
-import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
-import { Injectable } from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable}     from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
 
-let STUDENT_TRACK_API_URL = '/api/studenttracks'
+let STUDENT_TRACK_API_URL = '/api/studenttracks';
+let STUDENTS_API_URL = '/api/students';
 
 @Injectable()
 export class StudentService {
@@ -12,6 +13,13 @@ export class StudentService {
 
     public getStudentsForTrack(trackId: number): Observable<Student[]> {
         return this.http.get(`${STUDENT_TRACK_API_URL}/${trackId}/students.json`)
+            .map(resp => <any[]>resp.json())
+            .map(studentsJson => studentsJson.map(studentJson => new Student(studentJson)))
+            .catch(this.handleError);
+    }
+    
+    public getStudents(): Observable<Student[]> {
+        return this.http.get(`${STUDENTS_API_URL}/all.json`)
             .map(resp => <any[]>resp.json())
             .map(studentsJson => studentsJson.map(studentJson => new Student(studentJson)))
             .catch(this.handleError);

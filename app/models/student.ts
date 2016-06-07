@@ -1,5 +1,3 @@
-// COMPLETE THE STUDENT CLASS
-// expose firstname, lastname and school properties
 export class Student {
     public id: number;
     public firstname: string;
@@ -14,14 +12,12 @@ export class Student {
     }
 }
 
-// COMPLETE THE STUDENTTRACK CLASS
-// expose name property, expose addStudentToTrack and getStudents methods
 export class StudentTrack {
 
     private students: Student[];
     public name: string;
     public id: number;
-    
+
     constructor(studentTrackJson: any) {
         this.name = studentTrackJson.name;
         this.id = studentTrackJson.id;
@@ -30,6 +26,10 @@ export class StudentTrack {
 
     public addStudentToTrack(student: Student) {
         this.students.push(student);
+    }
+
+    public removeStudent(student: Student) {
+        this.students.splice(this.students.indexOf(student), 1);
     }
 
     public getStudents() {
