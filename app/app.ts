@@ -8,10 +8,10 @@ import { StudentService } from './services/studentservice';
 import 'rxjs/Rx';
 
 // create a class with annotations..
-@Component({	
-	selector: 'student-track-survey',
+@Component({	selector: 'student-track-survey',
+
 	template: `
-       <div *ngIf="studentTrack">
+	<div *ngFor="#studentTrack of studentTracks" class="studenttrack light-primary-color text-primary-color">
 	   <h1 class="dark-primary-color text-primary-color">Student track {{studentTrack.name}} (<span [innerText]="studentTrack.getStudents().length"></span> attendees)</h1>
 	    <student-details 
 			[student]="student" 
@@ -19,7 +19,7 @@ import 'rxjs/Rx';
 			*ngFor="let student of studentTrack.getStudents()" 
 			(selected)="setSelected(student)"> 
 		</student-details>
-        </div>
+	 </div>
 	`,
 	styles:[`
 	 .student { padding:15px; }
@@ -29,17 +29,33 @@ import 'rxjs/Rx';
     directives: [StudentDetails]
 })
 export class SurveyApplication {	
-	public studentTrack: StudentTrack; 	
+	public studentTracks: StudentTrack[]; 	
 	public currentStudent: Student;
 	
 	constructor (studentTrackService: StudentTrackService){
-	    studentTrackService.getStudentTracks().subscribe(studentTracks => this.studentTrack = studentTracks[0]);
+        this.studentTracks = [];
+	    studentTrackService.getStudentTracks().subscribe(studentTracks => this.studentTracks = studentTracks);
     }
 	
 	setSelected(student:Student){
+		console.log(`student selected ${student.firstname}`);
 		this.currentStudent = student;
 	}
+    
+    private randomFirstname(){
+        return this.pullRandom(['Nico', 'John', 'Harry', 'Klaas', 'Henk-Jan']);
+    }
+    private randomLastname(){
+        return this.pullRandom(['Beritsen', 'De Smedt', 'Jansen', 'Gorter', 'Brabander']);
+    }
+    private randomSchool(){
+        return this.pullRandom(['Hogeschool Breda', 'Hogeschool Den Bosch', 'Universiteit Amsterdam', 'Hogschool Utrecht']);
+    }
+    
+    private pullRandom(source: string[]){
+      return source[Math.floor(Math.random()*100)%source.length];
+    }
 }
 
 // bootstrap our application..
-bootstrap(SurveyApplication, [StudentTrackService, HTTP_PROVIDERS ]); 
+bootstrap(SurveyApplication, [StudentTrackService, StudentService, HTTP_PROVIDERS ]); 
