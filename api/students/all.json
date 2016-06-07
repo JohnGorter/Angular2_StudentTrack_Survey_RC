@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "firstname": "John",
+        "lastname": "Gorter",
+        "school": "HAN"
+    },
+    {
+        "id": 2,
+        "firstname": "Nico",
+        "lastname": "Jansen",
+        "school": "Hogeschool Breda"
+    },
+    {
+        "id": 3,
+        "firstname": "Harry",
+        "lastname": "De Smedt",
+        "school": "Universiteit Amsterdam"
+    },
+    {
+        "id": 4,
+        "firstname": "Klaas",
+        "lastname": "Beritsen",
+        "school": "Hogeschool Den Bosch"
+    }
+]

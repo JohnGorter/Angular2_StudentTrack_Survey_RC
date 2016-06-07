@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "firstname": "John",
+        "lastname": "Gorter",
+        "school": "HAN"
+    },
+    {
+        "id": 2,
+        "firstname": "Nico",
+        "lastname": "Jansen",
+        "school": "Hogeschool Breda"
+    },
+    {
+        "id": 4,
+        "firstname": "Klaas",
+        "lastname": "Beritsen",
+        "school": "Hogeschool Den Bosch"
+    }
+]
